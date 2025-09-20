@@ -1,3 +1,4 @@
+    
 import numpy as np
 from tqdm import tqdm  # type: ignore
 
@@ -27,10 +28,16 @@ class LinearRegression:
             gradient_intercept_ = np.sum(gradient_intercept_per_row)
 
             # Compute the gradient of the coefficients
-            gradient_coefs_per_row = -2 * np.matmul(y - y_pred, X)
+            gradient_coefs_per_row = -2 * np.matmul((y - y_pred), X)
             gradient_coefs_ = np.sum(gradient_coefs_per_row, axis=0)
 
             # Update the coefficients
             self.coefs_ -= self.learning_rate * gradient_coefs_
             self.intercept_ -= self.learning_rate * gradient_intercept_
+
+
+
+    def predict(self, X):
+        """Predict the target for the provided data."""
+        return np.matmul(X, self.coefs_) + self.intercept_
 
